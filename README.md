@@ -37,7 +37,7 @@ We publish detailed **Technical Reports (TRs)** that bridge the gap between acad
 |-----------|-------|--------|--------|
 | **TR-2025-01** | [Sovereign AI: Recursive Reasoning Systems](./04_Technical_Reports/TR-2025-01_Sovereign_AI.md) | AI/Legal | **Draft** |
 | **TR-2025-02** | [Autonomous Threat-Adaptive Cyberdefense](./04_Technical_Reports/TR-2025-02_Cyberdefense_Runtime.md) | InfoSec | **Draft** |
-| **TR-2025-03** | Neuroadaptive Audio Interfaces | BCI | *Planned* |
+| **TR-2025-03** | [Neuroadaptive Audio Interfaces](./04_Technical_Reports/TR-2025-03_Neuroadaptive_Audio.md) | BCI | **Draft** |
 
 ---
 
