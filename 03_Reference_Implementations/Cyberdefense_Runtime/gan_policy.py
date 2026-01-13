@@ -1,15 +1,24 @@
-import tensorflow as tf
 import numpy as np
 from typing import Tuple, Optional
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-class ChaosEnhancedPolicyGAN(tf.keras.Model):
+try:
+    import tensorflow as tf
+    ParentClass = tf.keras.Model
+except ImportError:
+    # Fallback for plotting without TF
+    print("⚠️ TensorFlow not found. Running in Plotting-Only Mode.")
+    tf = None
+    ParentClass = object
+
+class ChaosEnhancedPolicyGAN(ParentClass):
     """GAN-System [103a] mit Adversarial-Härtung und Chaos-Integration"""
     
     def __init__(self, policy_dim: int = 256, chaos_dim: int = 3, name='ChaosGAN'):
-        super(ChaosEnhancedPolicyGAN, self).__init__(name=name)
+        if tf:
+             super(ChaosEnhancedPolicyGAN, self).__init__(name=name)
         self.policy_dim = policy_dim
         self.chaos_dim = chaos_dim
         self.r_param = 3.99 # Logistic map parameter for chaos

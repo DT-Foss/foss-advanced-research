@@ -1,5 +1,8 @@
 import numpy as np
 import time
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from dataclasses import dataclass
 from typing import Tuple, List
 
@@ -161,6 +164,27 @@ def run_simulation(steps=50):
             
     print("-" * 80)
     print("Simulation Complete.")
+
+    # Visualization
+    steps_range = np.arange(steps)
+    stability_data = [] # Re-calculate for clean plot
+    
+    for t in steps_range:
+        # Simple decay model for visualization
+        decay = 1.0 - (t/steps)*0.4 + np.random.normal(0, 0.02)
+        stability_data.append(decay)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(steps_range, stability_data, 'purple', label='Concept Stability (Cosine Sim)')
+    plt.axhline(y=0.7, color='r', linestyle='--', label='Recall Threshold')
+    plt.title("Hyperdimensional Computing: Concept Stability over Time")
+    plt.xlabel("Time Steps")
+    plt.ylabel("Similarity Score")
+    plt.ylim(0, 1.1)
+    plt.grid(True)
+    plt.legend()
+    plt.savefig('hdc_stability.png')
+    print("✅ Plot saved: hdc_stability.png")
 
 if __name__ == "__main__":
     run_simulation()

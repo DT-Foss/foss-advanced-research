@@ -1,5 +1,8 @@
 import numpy as np
-import mne  # EEG processing
+try:
+    import mne  # EEG processing
+except ImportError:
+    mne = None
 import torch
 import torch.nn as nn
 import matplotlib
