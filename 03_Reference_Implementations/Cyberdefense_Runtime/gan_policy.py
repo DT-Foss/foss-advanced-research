@@ -150,13 +150,26 @@ class ChaosEnhancedPolicyGAN(ParentClass):
             if self.adversarial_score(policy) <= self.adversarial_threshold:
                 valid_policies.append(policy)
 if __name__ == "__main__":
-    gan = ChaosEnhancedPolicyGAN()
-    chaos = gan._generate_logistic_map_sequence(100)
+    # Robust execution: If TF is missing, we just simulate the math for the plot
+    r_param = 3.99
+    
+    if tf:
+        gan = ChaosEnhancedPolicyGAN()
+        chaos = gan._generate_logistic_map_sequence(100)
+    else:
+        # Standalone Logistic Map Generator
+        length = 100
+        x = 0.5 # Random init
+        chaos = np.zeros(length)
+        for i in range(length):
+            x = r_param * x * (1.0 - x)
+            chaos[i] = x
+            
     print(f"Chaos Sequence: {chaos[:5]}...")
     
     plt.figure(figsize=(10, 4))
     plt.plot(chaos, 'r.-', linewidth=0.5, markersize=2)
-    plt.title(f"Logistic Map Attractor (r={gan.r_param}) - Input for GAN Policy")
+    plt.title(f"Logistic Map Attractor (r={r_param}) - Input for GAN Policy")
     plt.xlabel("Iteration")
     plt.ylabel("Value")
     plt.grid(True)

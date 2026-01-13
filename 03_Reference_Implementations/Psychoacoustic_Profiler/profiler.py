@@ -101,7 +101,7 @@ class NeuroAdaptiveAudioProfiler:
                     nn.TransformerEncoderLayer(d_model=256, nhead=8),
                     num_layers=4
                 )
-                self.cross_attention = nn.MultiheadAttention(512, 12)
+                self.cross_attention = nn.MultiheadAttention(512, 8) # Fixed: 512 is divisible by 8
                 self.hrtf_predictor = nn.Linear(512, 1024)  # HRTF parameters
 
             def forward(self, audio_features, eeg_features):
