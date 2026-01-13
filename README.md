@@ -20,26 +20,59 @@ This repository is the **Engineering Portfolio** of David Tom Foss. It contains 
 
 ---
 
-## 🔬 Core Research Areas
+## 🔬 Research Domains & Reference Implementations
 
-### 🛡️ Autonomous Cyberdefense & Zero-Trust
-*   **[Cyberdefense Runtime](./03_Reference_Implementations/Cyberdefense_Runtime)**: Self-healing OS layer using GANs for real-time policy mutation.
-    <br><img src="./03_Reference_Implementations/Cyberdefense_Runtime/chaos_attractor.png" width="500" alt="Chaos Attractor">
-*   **[WASM Polyglot Container](./03_Reference_Implementations/WASM_Polyglot)**: Zero-Trust compute units with FHE (Homomorphic Encryption) and zk-SNARK attestation.
-    <br><img src="./03_Reference_Implementations/WASM_Polyglot/lwe_error.png" width="500" alt="Ring-LWE Error Distribution">
+The portfolio is organized into **5 Strategic Clusters** containing **16 Reference Implementations**. Each module provides a standalone scientific simulation, ranging from signal processing to quantum cryptography.
 
-### 🧠 Neuroadaptive AI & BCI
-*   **[Psychoacoustic Profiler](./03_Reference_Implementations/Psychoacoustic_Profiler)**: Closed-loop auditory optimization using EEG Transformers.
-    <br><img src="./03_Reference_Implementations/Psychoacoustic_Profiler/eeg_spectrum.png" width="500" alt="EEG Power Spectrum">
-*   **[Bidirectional Silent Comm](./03_Reference_Implementations/Bidirectional_Comm_Arch)**: Subvocal communication architecture via NFMI mesh networks.
-    <br><img src="./03_Reference_Implementations/Bidirectional_Comm_Arch/nfmi_plot.png" width="500" alt="NFMI Path Loss">
-*   **[4D Multisensory Projection](./03_Reference_Implementations/Multisensory_Projection)**: Hyperdimensional computing for cognitive data visualization.
-    <br><img src="./03_Reference_Implementations/Multisensory_Projection/hdc_stability.png" width="500" alt="HDC Concept Stability">
+### 🌌 Domain 1: Space & Satellite Systems
+| Module | Scientific Core | Status |
+| :--- | :--- | :--- |
+| **[Interplanetary Network](./03_Reference_Implementations/Interplanetary_Network_Analyzer)** | CCSDS Bundle Protocol & Light-Time Latency | ✅ **Active** |
+| **[UAV Landing Control](./03_Reference_Implementations/FH-SS_UAV_Simulation)** | Physics-Informed Neural Networks (PINNs) | ✅ **Verified** |
+| **[Orbital Manuever](./03_Reference_Implementations/Propellantless_Orbital_Drive)** | Inertial Attitude Control (Simulation) | 🚧 *Concept* |
 
-### 🚁 Resilient Autonomy
-*   **[UAV Landing Simulation](./03_Reference_Implementations/FH-SS_UAV_Simulation)**: Physics-Informed Neural Networks (PINN) for drone landing in GPS-denied zones.
-    <br><img src="./03_Reference_Implementations/FH-SS_UAV_Simulation/landing_trajectory.png" width="600" alt="PINN Landing Trajectory">
+### 🛡️ Domain 2: Defense & Intelligence (OSINT)
+| Module | Scientific Core | Status |
+| :--- | :--- | :--- |
+| **[Maritime/Aero Tracker](./03_Reference_Implementations/Maritime_Aero_Tracker)** | ADS-B/VDES Signal Propagation (Friis Eq) | ✅ **Active** |
+| **[Autonomous OSINT](./03_Reference_Implementations/Autonomous_OSINT_Platform)** | Force-Directed Graph Clustering & Entity Resolution | ✅ **Unit Tested** |
+| **[Cyberdefense Runtime](./03_Reference_Implementations/Cyberdefense_Runtime)** | Chaos Theory (Logistic Map) & GANs | ✅ **Verified** |
+| **[Causal Knowledge Graph](./03_Reference_Implementations/Causal_Knowledge_Graph)** | Bayesian Belief Networks (do-calculus) | ✅ **Active** |
 
+### ⚛️ Domain 3: Quantum & Hardware Security
+| Module | Scientific Core | Status |
+| :--- | :--- | :--- |
+| **[Quantum Network Mapper](./03_Reference_Implementations/Quantum_Network_Mapper)** | QKD Photon Loss Attenuation (Fiber Optics) | ✅ **Active** |
+| **[Hardware Trust Anchor](./03_Reference_Implementations/Hardware_Trust_Anchor)** | TPM 2.0 PCR Measurements & Remote Attestation | ✅ **Unit Tested** |
+| **[WASM Polyglot](./03_Reference_Implementations/WASM_Polyglot)** | Ring-LWE Lattice Cryptography | ✅ **Verified** |
+
+### 💹 Domain 4: FinTech & Quantitative Finance
+| Module | Scientific Core | Status |
+| :--- | :--- | :--- |
+| **[Algorithmic Arbitrage](./03_Reference_Implementations/Algorithmic_Arbitrage_Engine)** | Stochastic Calculus (Geometric Brownian Motion) | ✅ **Active** |
+| **[Quantitative Risk](./03_Reference_Implementations/Quantitative_Risk_Engine)** | Monte Carlo VaR (Cholesky Decomposition) | ✅ **Unit Tested** |
+
+### 🧠 Domain 5: Neurotech & AI
+| Module | Scientific Core | Status |
+| :--- | :--- | :--- |
+| **[Synthetic Data Factory](./03_Reference_Implementations/Synthetic_Data_Factory)** | Curriculum Learning & SNR Optimization | ✅ **Active** |
+| **[Psychoacoustic Profiler](./03_Reference_Implementations/Psychoacoustic_Profiler)** | EEG Spectral Analysis (Welch Method) | ✅ **Verified** |
+| **[Multisensory Projection](./03_Reference_Implementations/Multisensory_Projection)** | Hyperdimensional Computing (HDC) | ✅ **Verified** |
+| **[Bidirectional Comm](./03_Reference_Implementations/Bidirectional_Comm_Arch)** | NFMI Magnetic Induction Physics | ✅ **Verified** |
+
+---
+
+## 🚀 Quick Start (Engineering Demo)
+
+This repository includes a unified `Makefile` to run verification simulations for all 16 modules.
+
+```bash
+# 1. Install Scientific Dependencies (numpy, matplotlib, networkx, etc.)
+make install
+
+# 2. Run the Full Portfolio Verification (Generates 16 Proof Plots)
+make demo
+```
 
 ---
 
