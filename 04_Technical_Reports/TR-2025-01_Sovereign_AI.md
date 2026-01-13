@@ -99,3 +99,7 @@ Sovereign AI represents the shift from "Probabilistic Parrots" to "Reasoning Eng
 1.  **Foss, D. T.** (2025). *Sovereign CoT Generator: Source Code*. GitHub.
 2.  Wei, J., et al. (2022). *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models*. NeurIPS.
 3.  EU AI Act (2024). *Transparency Requirements for High-Risk AI Systems*.
+
+
+---
+**© 2025 David Tom Foss // R&D**

@@ -1,6 +1,6 @@
 # Autonomous Threat-Adaptive Cyberdefense Runtime (MVP)
 
-> **Status**: MVP Extracted & Verified  
+> **Status**: Reference Implementation v1.0  
 > **Patent Ref**: *Autonomes, bedrohungsadaptives Laufzeitsystem mit KI-gesteuerter Policymutation*  
 > **Author**: David Tom Foss  
 > **Citation**: See `CITATION.cff`
@@ -57,3 +57,18 @@ gcc chaos_sync.c -o chaos -lm
 
 ## 5. Strategic Value
 This MVP demonstrates the **"Hardware-Rooted AI Security"** concept. It moves beyond "Anti-Virus" (reactive) to "Mutation" (proactive).
+
+
+---
+**© 2025 David Tom Foss // R&D**
+### 🔓 Open Innovation Policy
+> **"Security through Obscurity is dead."**
+
+This architecture was originally developed as a proprietary IP asset (Patent Pending). However, in light of the accelerating capabilities of AI-driven cyber threats in 2025, **David Tom Foss // R&D** has transitioned to an **Open Source / Reference Implementation** strategy ("Publish Fast" vs "Patent Slow"). 
+
+We believe that critical defense infrastructure must be:
+1.  **Transparent**: Auditable by the global security community.
+2.  **Standardized**: Establishing de-facto protocols rather than walled gardens.
+3.  **Resilient**: Hardened by public scrutiny (Linus's Law).
+
+*This code is released under the MIT License to encourage rapid adoption and fork-based innovation.*

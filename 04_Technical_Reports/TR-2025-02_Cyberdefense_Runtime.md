@@ -2,7 +2,7 @@
 ## Autonomous Threat-Adaptive Cyberdefense Runtime with zk-SNARK Attestation
 
 **David Tom Foss**  
-Foss Advanced Research Lab  
+David Tom Foss // R&D  
 September 2025
 
 ---
@@ -56,3 +56,7 @@ In our mock environment (`gan_policy.py`), the system converged on optimal defen
 1.  Foss, D. T. (2025). *Cyberdefense Runtime Source Code*. GitHub.
 2.  Goodfellow, I., et al. (2014). *Generative Adversarial Nets*. NeurIPS.
 3.  Ben-Sasson, E., et al. (2014). *Zerocash: Decentralized Anonymous Payments from Bitcoin*. IEEE S&P.
+
+
+---
+**© 2025 David Tom Foss // R&D**

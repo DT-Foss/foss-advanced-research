@@ -1,14 +1,13 @@
-# FOSS ADVANCED RESEARCH LAB
-## Building Unhackable Systems for the Post-Quantum Era
+# DAVID TOM FOSS // ADVANCED RESEARCH
+## High-Assurance Systems for the Post-Quantum Era
 
-[![Research Status](https://img.shields.io/badge/Status-Active_Research-2ea44f)](https://github.com/DT-Foss/foss-advanced-research)
+[![Current Role](https://img.shields.io/badge/Role-Research_Engineer-blue)](https://www.linkedin.com/in/david-tom-foss)
+[![Status](https://img.shields.io/badge/Status-Open_for_Roles-success)](mailto:contact@davidtomfoss.com)
 [![Technical Reports](https://img.shields.io/badge/TRs-Published-007ec6)](./04_Technical_Reports/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Compliance: EU AI Act](https://img.shields.io/badge/Compliance-EU_AI_Act-green)](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 
-> **"From Abstract Patent to Executable Code."**
+> **"Bridging the capabilities of an R&D Lab with the agility of a Solo Founder."**
 
-This repository serves as the central **Research Monorepo** for David Tom Foss's 2025 portfolio. It contains **Reference Implementations (MVPs)**, **Simulation Environments**, and **Technical Reports** for novel architectures in AI Security, Neurotechnology, and Autonomous Systems.
+This repository is the **Engineering Portfolio** of David Tom Foss. It contains **Reference Implementations**, **Simulation Environments**, and **Technical Reports** that demonstrate capability in delivering high-complexity architectures (AI Security, Neurotech, Autonomous Systems).
 
 ---
 
@@ -61,7 +60,7 @@ If you use this research, please cite the specific Technical Report or the Lab i
 authors:
   - family-names: Foss
     given-names: David Tom
-title: "Foss Advanced Research Laboratory Technical Reports"
+title: "David Tom Foss // R&Doratory Technical Reports"
 year: 2025
 url: "https://github.com/DT-Foss/foss-advanced-research"
 ```
@@ -70,3 +69,18 @@ See [CITATION.cff](CITATION.cff) for BibTeX/APA formats.
 
 ---
 **© 2025 David Tom Foss.** Released under the [MIT License](LICENSE).
+
+
+---
+**© 2025 David Tom Foss // R&D**
+### 🔓 Open Innovation Policy
+> **"Security through Obscurity is dead."**
+
+This architecture was originally developed as a proprietary IP asset (Patent Pending). However, in light of the accelerating capabilities of AI-driven cyber threats in 2025, **David Tom Foss // R&D** has transitioned to an **Open Source / Reference Implementation** strategy ("Publish Fast" vs "Patent Slow"). 
+
+We believe that critical defense infrastructure must be:
+1.  **Transparent**: Auditable by the global security community.
+2.  **Standardized**: Establishing de-facto protocols rather than walled gardens.
+3.  **Resilient**: Hardened by public scrutiny (Linus's Law).
+
+*This code is released under the MIT License to encourage rapid adoption and fork-based innovation.*

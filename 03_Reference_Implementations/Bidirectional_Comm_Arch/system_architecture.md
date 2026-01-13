@@ -65,3 +65,7 @@ See `interfaces.py` for abstract base classes defining the contract between:
 - Signal Processing Logic
 - Network Stack
 - User Interface (Haptics)
+
+
+---
+**© 2025 David Tom Foss // R&D**

@@ -1,6 +1,6 @@
 # Sovereign CoT Generator (MVP)
 
-> **Status**: MVP Extracted & Verified  
+> **Status**: Reference Implementation v1.0  
 > **Concept**: *Pre-Polished Chain-of-Thought Generation for Recursive Self-Improvement*  
 > **Author**: David Tom Foss
 
@@ -54,3 +54,18 @@ Quantum Entanglement is a physical phenomenon where...
 
 ## 5. Impact for Portfolio
 This codebase serves as the **Data Factory** for the entire Sovereign AI ecosystem. It allows us to create proprietary datasets that no competitor possesses.
+
+
+---
+**© 2025 David Tom Foss // R&D**
+### 🔓 Open Innovation Policy
+> **"Security through Obscurity is dead."**
+
+This architecture was originally developed as a proprietary IP asset (Patent Pending). However, in light of the accelerating capabilities of AI-driven cyber threats in 2025, **David Tom Foss // R&D** has transitioned to an **Open Source / Reference Implementation** strategy ("Publish Fast" vs "Patent Slow"). 
+
+We believe that critical defense infrastructure must be:
+1.  **Transparent**: Auditable by the global security community.
+2.  **Standardized**: Establishing de-facto protocols rather than walled gardens.
+3.  **Resilient**: Hardened by public scrutiny (Linus's Law).
+
+*This code is released under the MIT License to encourage rapid adoption and fork-based innovation.*

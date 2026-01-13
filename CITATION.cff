@@ -5,17 +5,16 @@ authors:
 - family-names: "Foss"
   given-names: "David Tom"
   orcid: "https://orcid.org/0000-0000-0000-0000"
-title: "Foss Advanced Research Laboratory: 2025 Technical Reports & MVPs"
+title: "David Tom Foss: Advanced Research Portfolio (2025)"
 version: 1.0.0
 date-released: 2025-09-01
 url: "https://github.com/DT-Foss/foss-advanced-research"
 preferred-citation:
-  type: report
+  type: software
   authors:
   - family-names: "Foss"
     given-names: "David Tom"
-  institution: "Foss Advanced Research Lab"
-  title: "Architectures for Sovereign AI and Autonomous Defense"
+  title: "Engineering Portfolio: Sovereign AI & Autonomous Defense"
   year: 2025
   month: 9
   url: "https://github.com/DT-Foss/foss-advanced-research"

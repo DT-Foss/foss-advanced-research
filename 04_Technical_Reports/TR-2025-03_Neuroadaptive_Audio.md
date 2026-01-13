@@ -2,7 +2,7 @@
 ## Neuroadaptive Audio Interfaces: Closed-Loop Profiling via EEG Transformers
 
 **David Tom Foss**  
-Foss Advanced Research Lab  
+David Tom Foss // R&D  
 September 2025
 
 ---
@@ -60,3 +60,7 @@ def forward(self, audio_features, eeg_features):
 1.  Foss, D. T. (2025). *Psychoacoustic Profiler Codebase*. GitHub.
 2.  Vaswani, A., et al. (2017). *Attention Is All You Need*. NeurIPS.
 3.  Picton, T. W., et al. (2003). *Human auditory steady-state responses*. Int. J. Audiology.
+
+
+---
+**© 2025 David Tom Foss // R&D**
