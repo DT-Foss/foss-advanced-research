@@ -1,4 +1,4 @@
-W# DAVID TOM FOSS // ADVANCED RESEARCH
+## DAVID TOM FOSS // ADVANCED RESEARCH
 ## High-Assurance Systems for the Post-Quantum Era
 
 [![Current Role](https://img.shields.io/badge/Role-Research_Engineer-blue)](https://www.linkedin.com/in/david-tom-foss)
