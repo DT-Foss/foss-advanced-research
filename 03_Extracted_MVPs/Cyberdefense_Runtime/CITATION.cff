@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Foss"
+  given-names: "David Tom"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "Autonomous Threat-Adaptive Cyberdefense Runtime with zk-SNARK Attestation"
+version: 1.0.0
+date-released: 2025-09-01
+url: "https://github.com/foss-intelligence/cyberdefense-runtime"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Foss"
+    given-names: "David Tom"
+  journal: "SSRN Electronic Journal"
+  title: "A Novel Architecture for Autonomous Cyberdefense using PINNs and Hardware-Rooted Trust"
+  year: 2025
+  month: 9
+  status: preprint

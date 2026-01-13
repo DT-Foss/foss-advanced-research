@@ -1,0 +1,18 @@
+# Exclude Raw Patent Drafts (Privacy/PII Protection)
+01_High_Value_Assets/
+02_Research_Drafts/
+
+# Exclude System Files
+.DS_Store
+__pycache__/
+*.pyc
+
+# Exclude Virtual Envs
+venv/
+env/
+.env
+
+# Exclude Build Artifacts
+build/
+dist/
+*.egg-info/

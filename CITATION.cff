@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software or research, please cite it as below."
+type: dataset
+authors:
+- family-names: "Foss"
+  given-names: "David Tom"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "Foss Advanced Research Laboratory: 2025 Technical Reports & MVPs"
+version: 1.0.0
+date-released: 2025-09-01
+url: "https://github.com/DT-Foss/foss-advanced-research"
+preferred-citation:
+  type: report
+  authors:
+  - family-names: "Foss"
+    given-names: "David Tom"
+  institution: "Foss Advanced Research Lab"
+  title: "Architectures for Sovereign AI and Autonomous Defense"
+  year: 2025
+  month: 9
+  url: "https://github.com/DT-Foss/foss-advanced-research"
