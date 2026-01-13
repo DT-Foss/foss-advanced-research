@@ -5,6 +5,7 @@
 [![Status](https://img.shields.io/badge/Status-Open_for_Roles-success)](mailto:contact@davidtomfoss.com)
 [![Technical Reports](https://img.shields.io/badge/TRs-Published-007ec6)](./04_Technical_Reports/)
 [![SSRN](https://img.shields.io/badge/SSRN-Published-orange)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5675042)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **"Bridging the capabilities of an R&D Lab with the agility of a Solo Founder."**
 
