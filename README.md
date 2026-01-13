@@ -34,7 +34,7 @@ This repository is the **Engineering Portfolio** of David Tom Foss. It contains 
 ### 🚁 Resilient Autonomy
 *   **[UAV Landing Simulation](./03_Reference_Implementations/FH-SS_UAV_Simulation)**: Physics-Informed Neural Networks (PINN) for drone landing in GPS-denied zones.
     <br><img src="./03_Reference_Implementations/FH-SS_UAV_Simulation/landing_trajectory.png" width="600" alt="PINN Landing Trajectory">
-*   **[Sovereign CoT Generator](./03_Reference_Implementations/CoT_Generator)**: Synthetic data engine for recursive "Chain-of-Thought" reasoning.
+
 
 ---
 
