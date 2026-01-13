@@ -9,6 +9,7 @@ class ChaosEnhancedPolicyGAN(tf.keras.Model):
         super(ChaosEnhancedPolicyGAN, self).__init__(name=name)
         self.policy_dim = policy_dim
         self.chaos_dim = chaos_dim
+        self.r_param = 3.99 # Logistic map parameter for chaos
         self.adversarial_threshold = 0.8
         
         # Generator mit Chaos-Conditioning [103a1]
@@ -93,8 +94,26 @@ class ChaosEnhancedPolicyGAN(tf.keras.Model):
             name='hardened_discriminator'
         )
     
-    def generate_chaos_conditioned_policy(self, chaos_state: np.ndarray, batch_size: int = 1) -> np.ndarray:
+    def _generate_logistic_map_sequence(self, length: int, x0: Optional[float] = None) -> np.ndarray:
+        """Generates a chaotic sequence using the Logistic Map: x_{n+1} = r * x_n * (1 - x_n)"""
+        if x0 is None:
+            x0 = np.random.random()
+        
+        sequence = np.zeros(length)
+        x = x0
+        for i in range(length):
+            x = self.r_param * x * (1.0 - x)
+            sequence[i] = x
+        return sequence
+
+    def generate_chaos_conditioned_policy(self, chaos_state: Optional[np.ndarray] = None, batch_size: int = 1) -> np.ndarray:
         """Generiere Policy-Variante basierend auf Chaos-Zustand [105]"""
+        
+        # If no chaos state provided, generate one using true math
+        if chaos_state is None:
+            # Generate chaos for each dimension
+            chaos_matrix = np.array([self._generate_logistic_map_sequence(self.chaos_dim) for _ in range(batch_size)])
+            chaos_state = chaos_matrix.reshape(batch_size, self.chaos_dim) # [Batch, Dim]
         # Chaos-Features verarbeiten
         chaos_features = self.chaos_processor(chaos_state.reshape(1, -1))
         

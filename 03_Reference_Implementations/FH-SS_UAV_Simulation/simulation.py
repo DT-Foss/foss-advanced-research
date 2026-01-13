@@ -1,155 +1,159 @@
+import torch
+import torch.nn as nn
 import numpy as np
-import random
+import time
 from dataclasses import dataclass
-from typing import List, Dict, Tuple
 
 # --- Configuration ---
-FREQ_BASE = 40000  # 40 kHz
-FREQ_HOP_RANGE = 5000  # +/- 5 kHz
-PRN_LENGTH = 2047
-JAMMING_THRESHOLD = 0.3
+# Physical Constants
+G = 9.81          # Gravity (m/s^2)
+MASS = 25.0       # Satellite/Drone Mass (kg)
+MAX_THRUST = 400.0 # Max Thrust (N) - > T/W > 1 required for hovering
+T_END = 10.0      # Landing duration (s)
+
+# PINN Hyperparameters
+LAYERS = [1, 32, 32, 1] # Time -> [Hidden] -> Altitude
+LEARNING_RATE = 0.01
+EPOCHS = 1000
 
 @dataclass
-class SystemState:
-    timestamp: float
-    altitude: float
-    jamming_score: float # 0.0 - 1.0
-    snr: float
-    mode: str = "EKF" # EKF or UKF
-    energy_level: float = 100.0
+class PhysicsState:
+    t: float
+    z: float
+    v: float
+    a: float
+    thrust: float
+    residual: float
 
-class FH_SS_Array:
-    """Frequency-Hopping Spread Spectrum module."""
+class TrajectoryPINN(nn.Module):
+    """
+    Approximates the vertical trajectory z(t) using a neural network.
+    The physics loss enforces the dynamics: m*z'' = T - m*g
+    """
     def __init__(self):
-        self.prn_sequence = [random.choice([-1, 1]) for _ in range(PRN_LENGTH)]
-        self.current_freq = FREQ_BASE
-        
-    def update(self, time_step: int, jamming_score: float) -> float:
-        """
-        adapt frequency based on jamming:
-        f(t) = f0 + Delta_f * PRN(t) * [1 + alpha * J(t)]
-        """
-        alpha = 0.5 # Adaptability factor
-        prn_val = self.prn_sequence[time_step % PRN_LENGTH]
-        shift = FREQ_HOP_RANGE * prn_val * (1 + alpha * jamming_score)
-        self.current_freq = FREQ_BASE + shift
-        return self.current_freq
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(1, 32),
+            nn.Tanh(), # Tanh is C^inf differentiable, crucial for PINNs
+            nn.Linear(32, 32),
+            nn.Tanh(),
+            nn.Linear(32, 1) # Output: Altitude z(t)
+        )
 
-class RamanSpectroscopy:
-    """Jamming-triggered atmospheric correction."""
-    def __init__(self):
-        self.active = False
-        self.correction_factor = 1.0
+    def forward(self, t):
+        return self.net(t)
+
+def get_derivatives(model, t):
+    """Compute z, z', z'' using automatic differentiation."""
+    t.requires_grad = True
+    z = model(t)
+    
+    # First derivative (Velocity)
+    v = torch.autograd.grad(z, t, torch.ones_like(z), create_graph=True)[0]
+    
+    # Second derivative (Acceleration)
+    a = torch.autograd.grad(v, t, torch.ones_like(v), create_graph=True)[0]
+    
+    return z, v, a
+
+def train_pinn_planner(target_alt=0.0, start_alt=50.0):
+    """
+    Trains the PINN to find a physically valid landing trajectory.
+    Loss = Boundary_Loss + Physics_Loss + Control_Loss
+    """
+    print(f"🚀 Initializing PINN Trajectory Optimization (PyTorch)")
+    print(f"   Objective: Soft-Landing from {start_alt}m to {target_alt}m in {T_END}s")
+    
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = TrajectoryPINN().to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+    
+    # Training Loop
+    # We sample time points within the domain [0, T_END]
+    t_physics = torch.linspace(0, T_END, 100).view(-1, 1).to(device)
+    
+    for epoch in range(EPOCHS):
+        optimizer.zero_grad()
         
-    def update(self, jamming_score: float):
-        """Activates if jamming > threshold."""
-        if jamming_score > JAMMING_THRESHOLD:
-            self.active = True
-            # Simulate correction factor calculation
-            # c_corrected = c0 * sqrt(1 + ... + alpha_R * R_factor)
-            # Simplified for simulation:
-            self.correction_factor = 1.0 + (0.01 * jamming_score) 
-        else:
-            self.active = False
-            self.correction_factor = 1.0
+        # 1. Forward Pass (Derivatives)
+        z, v, a = get_derivatives(model, t_physics)
+        
+        # 2. Physics & Inverse Dynamics
+        # Force Balance: F_net = m*a
+        # Thrust = m*(a + g)
+        required_thrust = MASS * (a + G)
+        
+        # 3. Define Losses
+        
+        # A) Boundary Conditions
+        # z(0) = start_alt
+        z_start_pred = model(torch.tensor([[0.0]]).to(device))
+        loss_bc_start = (z_start_pred - start_alt)**2
+        
+        # z(T) = target_alt
+        z_end_pred = model(torch.tensor([[T_END]]).to(device))
+        loss_bc_end = (z_end_pred - target_alt)**2
+
+        # v(T) = 0 (Soft landing)
+        _, v_end_pred, _ = get_derivatives(model, torch.tensor([[T_END]]).to(device))
+        loss_bc_vel = (v_end_pred - 0.0)**2
+        
+        # B) Control Constraints (Thrust Limits)
+        # We penalize thrust < 0 or > MAX_THRUST
+        relu = nn.ReLU()
+        loss_control = torch.mean(relu(-required_thrust)) + torch.mean(relu(required_thrust - MAX_THRUST))
+        
+        # C) Physics Regularization (Minimize Jerk/Energy for smoothness)
+        # Minimizing Acceleration^2 helps simulate energy efficiency
+        loss_energy = torch.mean(required_thrust**2) * 1e-4
+
+        # Total Loss
+        loss = loss_bc_start + loss_bc_end + loss_bc_vel + loss_control + loss_energy
+        
+        loss.backward()
+        optimizer.step()
+        
+        if epoch % 200 == 0:
+            print(f"   Epoch {epoch:04d} | Loss: {loss.item():.6f} | Z_End: {z_end_pred.item():.2f}m")
             
-    def get_sound_speed_correction(self) -> float:
-        return 343.0 * self.correction_factor
+    return model
 
-class PINN_Optimizer:
-    """Physics-Informed Neural Network Optimizer (Simulated)."""
-    def __init__(self):
-        self.weights = {"data": 1.0, "physics": 1.0, "energy": 1.0}
-        
-    def compute_loss(self, state: SystemState) -> float:
-        """
-        L = w1*L_data + w2*L_physics + w3*L_energy
-        """
-        l_data = abs(state.altitude - 10.0) # Target 10m
-        l_physics = 0.1 * state.jamming_score # Mock physics residue (aerodynamics)
-        l_energy = max(0, 100 - state.energy_level)
-        
-        loss = (self.weights["data"] * l_data + 
-                self.weights["physics"] * l_physics + 
-                self.weights["energy"] * l_energy)
-        return loss
+def run_simulation():
+    """Run the trained PINN and simulate the flight."""
+    model = train_pinn_planner()
     
-    def adapt_weights(self, jamming_score: float):
-        """Adapt weights based on threat level."""
-        if jamming_score > 0.5:
-            # Prioritize physics/robustness over data
-            self.weights["physics"] = 2.0
-            self.weights["data"] = 0.5
-
-class SensorFusion:
-    """Adaptive EKF/UKF Switching."""
-    def __init__(self):
-        self.mode = "EKF" # or UKF
-        self.covariance = np.eye(3) * 0.1
-        
-    def update(self, jamming_score: float, nonlinearity: float):
-        """
-        Switch to UKF if highly nonlinear or high jamming.
-        Switch_to_UKF = (nonlinearity > theta) OR (J > theta_jam)
-        """
-        theta_jam = 0.4
-        if jamming_score > theta_jam or nonlinearity > 0.8:
-            self.mode = "UKF"
-        else:
-            self.mode = "EKF"
-            
-        # Adapt covariance: R_adaptive = R0 * [1 + beta * J^2/(1+J^2)]
-        beta_jam = 5.0
-        factor = 1 + beta_jam * (jamming_score**2 / (1 + jamming_score**2))
-        self.covariance = np.eye(3) * 0.1 * factor
-
-def run_simulation(steps=100):
-    print("Initialize FH-SS UAV Landing Simulation...")
+    print("\n🎥 Executing Flight Simulation based on PINN Solution...\n")
+    print(f"{'Time (s)':<10} | {'Alt (m)':<10} | {'Vel (m/s)':<10} | {'Accel':<10} | {'Thrust (N)':<10} | {'Status':<10}")
+    print("-" * 75)
     
-    fh_ss = FH_SS_Array()
-    raman = RamanSpectroscopy()
-    pinn = PINN_Optimizer()
-    fusion = SensorFusion()
+    with torch.no_grad():
+        t_eval = torch.linspace(0, T_END, 20).view(-1, 1)
+        z, v, a = get_derivatives(model, t_eval) # Re-compute grad context not needed for logging but getting a is tricky
+        
+        # Quick finite diff for accel log or just run model in grad mode once
     
-    # Initial state
-    altitude = 50.0 # meters
-    energy = 100.0
+    # Re-run forward with grad enabled just to extract 'a' for logging
+    t_eval.requires_grad = True
+    z, v, a = get_derivatives(model, t_eval)
     
-    history = []
-    
-    print(f"{'Step':<5} | {'Jamming':<8} | {'Freq (Hz)':<10} | {'Raman':<6} | {'Mode':<4} | {'Covariance':<10} | {'PINN Loss':<10}")
-    print("-" * 80)
-    
-    for t in range(steps):
-        # 1. Simulate Environment (Jamming increases over time)
-        jamming = min(1.0, max(0.0, (t - 20) / 50.0 + random.normalvariate(0, 0.05)))
-        nonlinearity = min(1.0, altitude / 100.0) # High altitude -> more linear
+    for i in range(len(t_eval)):
+        t_val = t_eval[i].item()
+        z_val = z[i].item()
+        v_val = v[i].item()
+        a_val = a[i].item()
         
-        # 2. Update FH-SS
-        freq = fh_ss.update(t, jamming)
+        thrust_val = MASS * (a_val + G)
         
-        # 3. Update Raman
-        raman.update(jamming)
-        speed_sound = raman.get_sound_speed_correction()
+        status = "FLIGHT"
+        if t_val >= T_END: status = "LANDED"
+        if z_val < 0.1: status = "TOUCHDOWN"
         
-        # 4. Update Fusion
-        fusion.update(jamming, nonlinearity)
-        
-        # 5. Update PINN
-        state = SystemState(float(t), altitude, jamming, 1.0, fusion.mode, energy)
-        pinn.adapt_weights(jamming)
-        loss = pinn.compute_loss(state)
-        
-        # 6. Physics Step (landing)
-        altitude = max(0.0, altitude - 0.5)
-        
-        # Log
-        if t % 10 == 0:
-            cov_diag = fusion.covariance[0,0]
-            print(f"{t:<5} | {jamming:<8.2f} | {freq:<10.0f} | {str(raman.active):<6} | {fusion.mode:<4} | {cov_diag:<10.3f} | {loss:<10.3f}")
-            
-    print("-" * 80)
-    print("Simulation Complete.")
+        print(f"{t_val:<10.2f} | {z_val:<10.2f} | {v_val:<10.2f} | {a_val:<10.2f} | {thrust_val:<10.2f} | {status:<10}")
 
 if __name__ == "__main__":
-    run_simulation()
+    # Check dependencies
+    try:
+        import torch
+        run_simulation()
+    except ImportError:
+        print("CRITICAL: PyTorch not found. Please run 'pip install torch'")
