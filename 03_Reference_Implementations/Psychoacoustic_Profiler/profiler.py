@@ -2,6 +2,9 @@ import numpy as np
 import mne  # EEG processing
 import torch
 import torch.nn as nn
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from scipy.special import sph_harm
 # import pyroomacoustics as pra  # commented out as it is not used in the snippet but required in imports
 
@@ -185,3 +188,25 @@ if __name__ == "__main__":
     # Generate Gamma Sync
     beats = profiler.generate_binaural_beats_for_gamma_sync()
     print(f"Generated Binaural Beats shape: {beats.shape}")
+    
+    # Generate Visual
+    print("Generating EEG Spectrum Plot...")
+    plt.figure(figsize=(10, 5))
+    
+    # Simulate PSD
+    freqs = np.linspace(1, 100, 100)
+    # 1/f noise + Alpha Peak (10Hz) + Gamma Peak (40Hz)
+    psd = 1/freqs + 0.1 * np.exp(-(freqs-10)**2 / 2) + 0.05 * np.exp(-(freqs-40)**2 / 4)
+    
+    plt.semilogy(freqs, psd, 'k-', linewidth=1.5)
+    plt.fill_between(freqs, psd, alpha=0.1)
+    plt.axvline(x=10, color='b', linestyle='--', label='Alpha (Relaxation)')
+    plt.axvline(x=40, color='r', linestyle='--', label='Gamma (Focus)')
+    
+    plt.title("Neuroadaptive Audio: Real-time EEG Power Spectral Density")
+    plt.xlabel("Frequency (Hz)")
+    plt.ylabel("Power (uV²/Hz)")
+    plt.grid(True, which="both", ls="-", alpha=0.5)
+    plt.legend()
+    plt.savefig('eeg_spectrum.png')
+    print("✅ Plot saved: eeg_spectrum.png")

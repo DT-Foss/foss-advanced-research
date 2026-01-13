@@ -1,6 +1,9 @@
 import numpy as np
 import base64
 import json
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 class RingLWESimulator:
     """
@@ -100,3 +103,16 @@ class WASMPolyglotContainer:
 if __name__ == "__main__":
     container = WASMPolyglotContainer()
     print(f"Public Key Fragment: {container.get_public_key_json()}")
+    
+    # Visualize Error Distribution
+    lwe = container.lwe_sim
+    noise_samples = np.array([lwe.sample_poly_noise()[0] for _ in range(1000)])
+    
+    plt.figure(figsize=(8, 5))
+    plt.hist(noise_samples, bins=30, color='green', alpha=0.7, rwidth=0.85)
+    plt.title(f"Ring-LWE Error Distribution (Sigma={lwe.sigma})")
+    plt.xlabel("Error Value")
+    plt.ylabel("Frequency")
+    plt.grid(True, alpha=0.3)
+    plt.savefig('lwe_error.png')
+    print("✅ Plot saved: lwe_error.png")

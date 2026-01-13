@@ -1,6 +1,9 @@
 import tensorflow as tf
 import numpy as np
 from typing import Tuple, Optional
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 class ChaosEnhancedPolicyGAN(tf.keras.Model):
     """GAN-System [103a] mit Adversarial-Härtung und Chaos-Integration"""
@@ -137,4 +140,16 @@ class ChaosEnhancedPolicyGAN(tf.keras.Model):
         for policy in policy_variants:
             if self.adversarial_score(policy) <= self.adversarial_threshold:
                 valid_policies.append(policy)
-        return np.array(valid_policies)
+if __name__ == "__main__":
+    gan = ChaosEnhancedPolicyGAN()
+    chaos = gan._generate_logistic_map_sequence(100)
+    print(f"Chaos Sequence: {chaos[:5]}...")
+    
+    plt.figure(figsize=(10, 4))
+    plt.plot(chaos, 'r.-', linewidth=0.5, markersize=2)
+    plt.title(f"Logistic Map Attractor (r={gan.r_param}) - Input for GAN Policy")
+    plt.xlabel("Iteration")
+    plt.ylabel("Value")
+    plt.grid(True)
+    plt.savefig('chaos_attractor.png')
+    print("✅ Plot saved: chaos_attractor.png")

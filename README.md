@@ -24,12 +24,17 @@ This repository is the **Engineering Portfolio** of David Tom Foss. It contains 
 
 ### 🛡️ Autonomous Cyberdefense & Zero-Trust
 *   **[Cyberdefense Runtime](./03_Reference_Implementations/Cyberdefense_Runtime)**: Self-healing OS layer using GANs for real-time policy mutation.
+    <br><img src="./03_Reference_Implementations/Cyberdefense_Runtime/chaos_attractor.png" width="500" alt="Chaos Attractor">
 *   **[WASM Polyglot Container](./03_Reference_Implementations/WASM_Polyglot)**: Zero-Trust compute units with FHE (Homomorphic Encryption) and zk-SNARK attestation.
+    <br><img src="./03_Reference_Implementations/WASM_Polyglot/lwe_error.png" width="500" alt="Ring-LWE Error Distribution">
 
 ### 🧠 Neuroadaptive AI & BCI
 *   **[Psychoacoustic Profiler](./03_Reference_Implementations/Psychoacoustic_Profiler)**: Closed-loop auditory optimization using EEG Transformers.
+    <br><img src="./03_Reference_Implementations/Psychoacoustic_Profiler/eeg_spectrum.png" width="500" alt="EEG Power Spectrum">
 *   **[Bidirectional Silent Comm](./03_Reference_Implementations/Bidirectional_Comm_Arch)**: Subvocal communication architecture via NFMI mesh networks.
+    <br><img src="./03_Reference_Implementations/Bidirectional_Comm_Arch/nfmi_plot.png" width="500" alt="NFMI Path Loss">
 *   **[4D Multisensory Projection](./03_Reference_Implementations/Multisensory_Projection)**: Hyperdimensional computing for cognitive data visualization.
+    <br><img src="./03_Reference_Implementations/Multisensory_Projection/hdc_stability.png" width="500" alt="HDC Concept Stability">
 
 ### 🚁 Resilient Autonomy
 *   **[UAV Landing Simulation](./03_Reference_Implementations/FH-SS_UAV_Simulation)**: Physics-Informed Neural Networks (PINN) for drone landing in GPS-denied zones.

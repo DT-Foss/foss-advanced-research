@@ -1,4 +1,7 @@
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from dataclasses import dataclass
 
 @dataclass
@@ -70,6 +73,32 @@ class NFMIPhysicsEngine:
                 status = "📉 FADING"
                 
             print(f"{d:<10.2f} | {rx_power:<15.2f} | {status:<15}")
+            
+        # Plotting
+        plt.figure(figsize=(10, 6))
+        
+        # Calculate RF (1/r^2) for comparison
+        rf_path_loss = 20 * np.log10(distances) + 20 * np.log10(13.56e6) - 147.55
+        rf_rx = tx_power - rf_path_loss
+        
+        rx_powers_nfmi = []
+        for d in distances:
+            l = NFMILinkBudget(13.56e6, tx_power, d, 0.01)
+            rx_powers_nfmi.append(tx_power - self.calculate_path_loss(l))
+            
+        plt.plot(distances, rx_powers_nfmi, 'b-', linewidth=2, label='NFMI (Magnetic) - $1/r^6$')
+        plt.plot(distances, rf_rx, 'r--', linewidth=1, label='RF (Far Field) - $1/r^2$')
+        plt.axhline(y=secure_threshold, color='k', linestyle=':', label='Noise Floor (Security Limit)')
+        plt.axvspan(0, 0.5, alpha=0.2, color='green', label='Secure Zone')
+        
+        plt.title("The Bubble of Silence: NFMI vs RF Path Loss")
+        plt.xlabel("Distance (m)")
+        plt.ylabel("Received Power (dBm)")
+        plt.ylim(-120, -20)
+        plt.grid(True)
+        plt.legend()
+        plt.savefig('nfmi_plot.png')
+        print("✅ Plot saved: nfmi_plot.png")
 
 if __name__ == "__main__":
     engine = NFMIPhysicsEngine()
