@@ -22,57 +22,71 @@ This repository is the **Engineering Portfolio** of David Tom Foss. It contains 
 
 ## 🔬 Research Domains & Reference Implementations
 
-The portfolio is organized into **5 Strategic Clusters** containing **16 Reference Implementations**. Each module provides a standalone scientific simulation, ranging from signal processing to quantum cryptography.
+The portfolio is organized into **5 Strategic Clusters** containing **16 Reference Implementations**. Each module provides a standalone scientific simulation.
 
 ### 🌌 Domain 1: Space & Satellite Systems
-| Module | Scientific Core | Status |
-| :--- | :--- | :--- |
-| **[Interplanetary Network](./03_Reference_Implementations/Interplanetary_Network_Analyzer)** | CCSDS Bundle Protocol & Light-Time Latency | ✅ **Active** |
-| **[UAV Landing Control](./03_Reference_Implementations/FH-SS_UAV_Simulation)** | Physics-Informed Neural Networks (PINNs) | ✅ **Verified** |
-| **[Orbital Manuever](./03_Reference_Implementations/Propellantless_Orbital_Drive)** | Inertial Attitude Control (Simulation) | 🚧 *Concept* |
+*   **[Interplanetary Network Simulator](./03_Reference_Implementations/Interplanetary_Network_Analyzer)**: CCSDS Bundle Protocol modeling for high-latency Mars-Earth links.
+    <br><img src="./03_Reference_Implementations/Interplanetary_Network_Analyzer/dtn_link_analysis.png" width="80%" alt="DTN Link Analysis">
+*   **[UAV Landing Control](./03_Reference_Implementations/FH-SS_UAV_Simulation)**: Physics-Informed Neural Networks (PINNs) for autonomous landing in GPS-denied zones.
+    <br><img src="./03_Reference_Implementations/FH-SS_UAV_Simulation/landing_trajectory.png" width="80%" alt="PINN Landing Trajectory">
 
 ### 🛡️ Domain 2: Defense & Intelligence (OSINT)
-| Module | Scientific Core | Status |
-| :--- | :--- | :--- |
-| **[Maritime/Aero Tracker](./03_Reference_Implementations/Maritime_Aero_Tracker)** | ADS-B/VDES Signal Propagation (Friis Eq) | ✅ **Active** |
-| **[Autonomous OSINT](./03_Reference_Implementations/Autonomous_OSINT_Platform)** | Force-Directed Graph Clustering & Entity Resolution | ✅ **Unit Tested** |
-| **[Cyberdefense Runtime](./03_Reference_Implementations/Cyberdefense_Runtime)** | Chaos Theory (Logistic Map) & GANs | ✅ **Verified** |
-| **[Causal Knowledge Graph](./03_Reference_Implementations/Causal_Knowledge_Graph)** | Bayesian Belief Networks (do-calculus) | ✅ **Active** |
+*   **[Autonomous OSINT Platform](./03_Reference_Implementations/Autonomous_OSINT_Platform)**: Entity Resolution using Force-Directed Graph Clustering.
+    <br><img src="./03_Reference_Implementations/Autonomous_OSINT_Platform/knowledge_graph.png" width="80%" alt="Knowledge Graph">
+*   **[Maritime & Aero Tracker](./03_Reference_Implementations/Maritime_Aero_Tracker)**: ADS-B/VDES Surveillance Simulation using Friis Transmission Equation.
+    <br><img src="./03_Reference_Implementations/Maritime_Aero_Tracker/surveillance_plot.png" width="80%" alt="Surveillance Radar Plot">
+*   **[Cyberdefense Runtime](./03_Reference_Implementations/Cyberdefense_Runtime)**: Self-healing OS layer using Chaos Theory (Logistic Map) & GANs.
+    <br><img src="./03_Reference_Implementations/Cyberdefense_Runtime/chaos_attractor.png" width="80%" alt="Chaos Attractor">
+*   **[ICS/SCADA Fingerprinter](./03_Reference_Implementations/ICS_SCADA_Fingerprinter)**: Critical Infrastructure Protocol Discovery (Modbus/DNP3).
+    <br><img src="./03_Reference_Implementations/ICS_SCADA_Fingerprinter/ics_topology.png" width="80%" alt="SCADA Topology">
+*   **[Causal Knowledge Graph](./03_Reference_Implementations/Causal_Knowledge_Graph)**: Bayesian Belief Networks for Attack Path Analysis.
+    <br><img src="./03_Reference_Implementations/Causal_Knowledge_Graph/causal_dag.png" width="80%" alt="Causal DAG">
 
 ### ⚛️ Domain 3: Quantum & Hardware Security
-| Module | Scientific Core | Status |
-| :--- | :--- | :--- |
-| **[Quantum Network Mapper](./03_Reference_Implementations/Quantum_Network_Mapper)** | QKD Photon Loss Attenuation (Fiber Optics) | ✅ **Active** |
-| **[Hardware Trust Anchor](./03_Reference_Implementations/Hardware_Trust_Anchor)** | TPM 2.0 PCR Measurements & Remote Attestation | ✅ **Unit Tested** |
-| **[WASM Polyglot](./03_Reference_Implementations/WASM_Polyglot)** | Ring-LWE Lattice Cryptography | ✅ **Verified** |
+*   **[Quantum Network Mapper](./03_Reference_Implementations/Quantum_Network_Mapper)**: QKD Key Rate Simulation based on Optical Fiber Attenuation.
+    <br><img src="./03_Reference_Implementations/Quantum_Network_Mapper/qkd_topology.png" width="80%" alt="QKD Topology">
+*   **[Hardware Trust Anchor](./03_Reference_Implementations/Hardware_Trust_Anchor)**: TPM 2.0 PCR Measured Boot & Remote Attestation Simulator.
+    <br><img src="./03_Reference_Implementations/Hardware_Trust_Anchor/tpm_attestation.png" width="80%" alt="TPM Attestation">
+*   **[WASM Polyglot Container](./03_Reference_Implementations/WASM_Polyglot)**: Lattice Cryptography (Ring-LWE) for Post-Quantum Security.
+    <br><img src="./03_Reference_Implementations/WASM_Polyglot/lwe_error.png" width="80%" alt="LWE Error Dist">
 
 ### 💹 Domain 4: FinTech & Quantitative Finance
-| Module | Scientific Core | Status |
-| :--- | :--- | :--- |
-| **[Algorithmic Arbitrage](./03_Reference_Implementations/Algorithmic_Arbitrage_Engine)** | Stochastic Calculus (Geometric Brownian Motion) | ✅ **Active** |
-| **[Quantitative Risk](./03_Reference_Implementations/Quantitative_Risk_Engine)** | Monte Carlo VaR (Cholesky Decomposition) | ✅ **Unit Tested** |
+*   **[Quantitative Risk Engine](./03_Reference_Implementations/Quantitative_Risk_Engine)**: Monte Carlo Value-at-Risk (VaR) with Cholesky Decomposition.
+    <br><img src="./03_Reference_Implementations/Quantitative_Risk_Engine/risk_heatmap.png" width="80%" alt="Risk Heatmap">
+*   **[Algorithmic Arbitrage](./03_Reference_Implementations/Algorithmic_Arbitrage_Engine)**: Latency Arbitrage Simulation using Geometric Brownian Motion.
+    <br><img src="./03_Reference_Implementations/Algorithmic_Arbitrage_Engine/arbitrage_risk.png" width="80%" alt="Arbitrage Visual">
 
 ### 🧠 Domain 5: Neurotech & AI
-| Module | Scientific Core | Status |
-| :--- | :--- | :--- |
-| **[Synthetic Data Factory](./03_Reference_Implementations/Synthetic_Data_Factory)** | Curriculum Learning & SNR Optimization | ✅ **Active** |
-| **[Psychoacoustic Profiler](./03_Reference_Implementations/Psychoacoustic_Profiler)** | EEG Spectral Analysis (Welch Method) | ✅ **Verified** |
-| **[Multisensory Projection](./03_Reference_Implementations/Multisensory_Projection)** | Hyperdimensional Computing (HDC) | ✅ **Verified** |
-| **[Bidirectional Comm](./03_Reference_Implementations/Bidirectional_Comm_Arch)** | NFMI Magnetic Induction Physics | ✅ **Verified** |
+*   **[Synthetic Data Factory](./03_Reference_Implementations/Synthetic_Data_Factory)**: LLM Curriculum Learning Pipeline Simulation.
+    <br><img src="./03_Reference_Implementations/Synthetic_Data_Factory/data_pipeline.png" width="80%" alt="Data Pipeline">
+*   **[Psychoacoustic Profiler](./03_Reference_Implementations/Psychoacoustic_Profiler)**: EEG Spectral Analysis (Welch Method).
+    <br><img src="./03_Reference_Implementations/Psychoacoustic_Profiler/eeg_spectrum.png" width="80%" alt="EEG Spectrum">
+*   **[Multisensory Projection](./03_Reference_Implementations/Multisensory_Projection)**: Hyperdimensional Computing (HDC) Stability Analysis.
+    <br><img src="./03_Reference_Implementations/Multisensory_Projection/hdc_stability.png" width="80%" alt="HDC Stability">
+*   **[Bidirectional Comm](./03_Reference_Implementations/Bidirectional_Comm_Arch)**: Near-Field Magnetic Induction (NFMI) Path Loss Physics.
+    <br><img src="./03_Reference_Implementations/Bidirectional_Comm_Arch/nfmi_plot.png" width="80%" alt="NFMI Plot">
 
 ---
 
-## 🚀 Quick Start (Engineering Demo)
+## ⚡ Confidence Check & Reproducibility
 
-This repository includes a unified `Makefile` to run verification simulations for all 16 modules.
+We believe in **"Don't trust, verify"**. This repository includes a rigorous verification suite.
+
+### 1. Interactive Boot Sequence (The "System Check")
+Run the cinematic system intialization to verify module status:
 
 ```bash
-# 1. Install Scientific Dependencies (numpy, matplotlib, networkx, etc.)
-make install
-
-# 2. Run the Full Portfolio Verification (Generates 16 Proof Plots)
-make demo
+make boot
 ```
+
+### 2. Scientific Verification
+Verify all physics simulations and cryptographic assertions via included Unit Tests.
+
+```bash
+make check
+```
+
+*This triggers the `unittest` suites for the Risk Engine, OSINT Graph, and TPM Attestation modules.*
 
 ---
 
