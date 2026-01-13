@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 import time
+import matplotlib.pyplot as plt
 from dataclasses import dataclass
 
 # --- Configuration ---
@@ -127,16 +128,49 @@ def run_simulation():
     print("-" * 75)
     
     with torch.no_grad():
-        t_eval = torch.linspace(0, T_END, 20).view(-1, 1)
-        z, v, a = get_derivatives(model, t_eval) # Re-compute grad context not needed for logging but getting a is tricky
-        
-        # Quick finite diff for accel log or just run model in grad mode once
+        t_eval = torch.linspace(0, T_END, 100).view(-1, 1)
+        z, v, a = get_derivatives(model, t_eval)
     
-    # Re-run forward with grad enabled just to extract 'a' for logging
-    t_eval.requires_grad = True
-    z, v, a = get_derivatives(model, t_eval)
+    # Generate Plot
+    print("📊 Generating Trajectory Plot: landing_trajectory.png")
+    plt.figure(figsize=(10, 6))
     
-    for i in range(len(t_eval)):
+    # Plot Altitude
+    plt.subplot(3, 1, 1)
+    plt.plot(t_eval.numpy(), z.numpy(), 'b-', label='Altitude (m)')
+    plt.axhline(y=0.0, color='r', linestyle='--', alpha=0.5)
+    plt.title(f"PINN Autonomous Landing Trajectory (Mass={MASS}kg)")
+    plt.ylabel("Height (m)")
+    plt.grid(True)
+    plt.legend()
+    
+    # Plot Velocity
+    plt.subplot(3, 1, 2)
+    plt.plot(t_eval.numpy(), v.numpy(), 'g-', label='Velocity (m/s)')
+    plt.ylabel("Vel (m/s)")
+    plt.grid(True)
+    plt.legend()
+    
+    # Plot Acceleration/Thrust
+    plt.subplot(3, 1, 3)
+    thrust = MASS * (a.numpy() + G)
+    plt.plot(t_eval.numpy(), thrust, 'r-', label='Thrust (N)')
+    plt.axhline(y=MAX_THRUST, color='k', linestyle=':', label='Max Thrust')
+    plt.xlabel("Time (s)")
+    plt.ylabel("Thrust (N)")
+    plt.grid(True)
+    plt.legend()
+    
+    plt.tight_layout()
+    plt.savefig('landing_trajectory.png')
+    print("✅ Plot saved.")
+
+    # Re-run for logging (using fewer points)
+    t_eval_log = torch.linspace(0, T_END, 20).view(-1, 1)
+    t_eval_log.requires_grad = True
+    z, v, a = get_derivatives(model, t_eval_log)
+    
+    for i in range(len(t_eval_log)):
         t_val = t_eval[i].item()
         z_val = z[i].item()
         v_val = v[i].item()
