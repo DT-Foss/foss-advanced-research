@@ -134,11 +134,9 @@ def run_simulation():
     
     # Generate Plot
     print("📊 Generating Trajectory Plot: landing_trajectory.png")
-    plt.figure(figsize=(10, 6))
-    
     # Plot Altitude
     plt.subplot(3, 1, 1)
-    plt.plot(t_eval.numpy(), z.numpy(), 'b-', label='Altitude (m)')
+    plt.plot(t_eval.detach().numpy(), z.detach().numpy(), 'b-', label='Altitude (m)')
     plt.axhline(y=0.0, color='r', linestyle='--', alpha=0.5)
     plt.title(f"PINN Autonomous Landing Trajectory (Mass={MASS}kg)")
     plt.ylabel("Height (m)")
@@ -147,15 +145,15 @@ def run_simulation():
     
     # Plot Velocity
     plt.subplot(3, 1, 2)
-    plt.plot(t_eval.numpy(), v.numpy(), 'g-', label='Velocity (m/s)')
+    plt.plot(t_eval.detach().numpy(), v.detach().numpy(), 'g-', label='Velocity (m/s)')
     plt.ylabel("Vel (m/s)")
     plt.grid(True)
     plt.legend()
     
     # Plot Acceleration/Thrust
     plt.subplot(3, 1, 3)
-    thrust = MASS * (a.numpy() + G)
-    plt.plot(t_eval.numpy(), thrust, 'r-', label='Thrust (N)')
+    thrust = MASS * (a.detach().numpy() + G)
+    plt.plot(t_eval.detach().numpy(), thrust, 'r-', label='Thrust (N)')
     plt.axhline(y=MAX_THRUST, color='k', linestyle=':', label='Max Thrust')
     plt.xlabel("Time (s)")
     plt.ylabel("Thrust (N)")
