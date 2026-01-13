@@ -127,9 +127,10 @@ def run_simulation():
     print(f"{'Time (s)':<10} | {'Alt (m)':<10} | {'Vel (m/s)':<10} | {'Accel':<10} | {'Thrust (N)':<10} | {'Status':<10}")
     print("-" * 75)
     
-    with torch.no_grad():
-        t_eval = torch.linspace(0, T_END, 100).view(-1, 1)
-        z, v, a = get_derivatives(model, t_eval)
+    # Generate Plot Data (Grad enabled for physics derivatives)
+    t_eval = torch.linspace(0, T_END, 100).view(-1, 1)
+    t_eval.requires_grad = True
+    z, v, a = get_derivatives(model, t_eval)
     
     # Generate Plot
     print("📊 Generating Trajectory Plot: landing_trajectory.png")
