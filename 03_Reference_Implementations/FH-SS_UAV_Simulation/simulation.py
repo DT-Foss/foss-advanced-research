@@ -1,8 +1,8 @@
 import torch
-import torch.nn as nn
-import numpy as np
-import time
+import matplotlib
+matplotlib.use('Agg') # Headless mode for CI/CD and Docker
 import matplotlib.pyplot as plt
+import torch.nn as nn
 from dataclasses import dataclass
 
 # --- Configuration ---
