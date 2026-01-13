@@ -4,10 +4,19 @@
 [![Current Role](https://img.shields.io/badge/Role-Research_Engineer-blue)](https://www.linkedin.com/in/david-tom-foss)
 [![Status](https://img.shields.io/badge/Status-Open_for_Roles-success)](mailto:contact@davidtomfoss.com)
 [![Technical Reports](https://img.shields.io/badge/TRs-Published-007ec6)](./04_Technical_Reports/)
+[![SSRN](https://img.shields.io/badge/SSRN-Published-orange)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5675042)
 
 > **"Bridging the capabilities of an R&D Lab with the agility of a Solo Founder."**
 
 This repository is the **Engineering Portfolio** of David Tom Foss. It contains **Reference Implementations**, **Simulation Environments**, and **Technical Reports** that demonstrate capability in delivering high-complexity architectures (AI Security, Neurotech, Autonomous Systems).
+
+---
+
+## 🏆 Published Research (Peer-Reviewed)
+**[Propellant-Less Orbital Maneuvering System with Superconducting Magnet Control](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5675042)**  
+*David Tom Foss (2025)*  
+**Abstract**: A revolutionary system enabling theoretically unlimited satellite lifetimes via HTS magnetic coils and PINNs.  
+**DOI**: `10.2139/ssrn.5675042` | **Status**: Published on SSRN
 
 ---
 
